@@ -20,7 +20,21 @@ function SlideShow({ title, movies, onSelect }) {
           modules={[Navigation]}
           navigation
           spaceBetween={10}
-          slidesPerView={5.8}
+          slidesPerView={1.4}
+          breakpoints={{
+            480: {
+              slidesPerView: 2.2,
+            },
+            768: {
+              slidesPerView: 2.6,
+            },
+            1024: {
+              slidesPerView: 3.6,
+            },
+            1440: {
+              slidesPerView: 5.2,
+            },
+          }}
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>

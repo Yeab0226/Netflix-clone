@@ -2,7 +2,9 @@
 .demoLogo {
   color: #fff;
   text-decoration: none;
-  font: bold 20px Arial, sans-serif;
+  font:
+    bold 20px Arial,
+    sans-serif;
   white-space: nowrap;
 }
 
@@ -10,7 +12,9 @@
   color: #ddd;
   background: #202020;
   text-align: center;
-  font: 12px/1.5 Arial, sans-serif;
+  font:
+    12px/1.5 Arial,
+    sans-serif;
   padding: 6px 12px;
   margin-top: 12px;
 }
@@ -296,5 +300,120 @@
 
   .rightSection {
     gap: 12px;
+  }
+}
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  min-width: 0;
+}
+
+.searchButton,
+.iconButton,
+.profileButton {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Collapse navigation before the desktop header gets crowded. */
+@media (max-width: 1200px) {
+  .container {
+    gap: 12px;
+  }
+
+  .demoLogo {
+    margin-right: auto;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 16px;
+    width: min(280px, calc(100vw - 32px));
+    padding: 16px;
+    background: #181818;
+    border: 1px solid #444;
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    z-index: 1001;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .navLink {
+    display: block;
+    padding: 12px;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 767px) {
+  .rightSection {
+    gap: 4px;
+  }
+
+  .demoLogo {
+    font-size: 16px;
+  }
+
+  /* Open search below the controls instead of widening the header. */
+  .searchContainer {
+    position: static;
+  }
+
+  .searchInput {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 12px;
+    right: 12px;
+    width: auto;
+    background: #181818;
+    z-index: 1002;
+  }
+
+  .profileMenu {
+    min-width: 0;
+    width: min(220px, calc(100vw - 24px));
+  }
+
+  .profileMenuItem {
+    overflow-wrap: anywhere;
+  }
+
+  .demoNotice {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .rightSection {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

@@ -1,7 +1,8 @@
 .cardWrapper {
   position: relative;
-  width: 290px;
-  height: 198px;
+  width: 100%;
+  height: auto;
+  min-width: 0;
   cursor: pointer;
   transition: transform 0.3s ease;
   overflow: visible;
@@ -9,8 +10,10 @@
 }
 
 .poster {
-  width: 227px;
-  height: 128px;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 6px;
   object-fit: cover;
   transition: transform 0.3s ease;
@@ -54,7 +57,10 @@
   pointer-events: auto;
 }
 
-.cardWrapper:hover, .cardWrapper:focus-within { z-index: 10; }
+.cardWrapper:hover,
+.cardWrapper:focus-within {
+  z-index: 10;
+}
 
 .hoverImage {
   width: 100%;
@@ -131,7 +137,8 @@
   color: #ddd;
 }
 
-.posterButton, .iconButton {
+.posterButton,
+.iconButton {
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -140,15 +147,83 @@
   display: inline-flex;
 }
 
-.posterButton:focus-visible, .iconButton:focus-visible {
+.posterButton:focus-visible,
+.iconButton:focus-visible {
   outline: 2px solid white;
   outline-offset: 3px;
 }
 
-.detailsButton { margin-left: auto; }
-.preview { position: relative; height: 200px; overflow: hidden; border-radius: 8px 8px 0 0; }
-.previewPlayer { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+.detailsButton {
+  margin-left: auto;
+}
+.preview {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+.previewPlayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
 
 @media (hover: none) {
-  .hoverCard { display: none; }
+  .hoverCard {
+    display: none;
+  }
+}
+
+.posterButton {
+  display: block;
+  width: 100%;
+}
+
+.iconButton {
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.metaRow {
+  flex-wrap: wrap;
+}
+
+/* Keep the preview inside its slide's horizontal boundaries. */
+.hoverCard {
+  top: -12px;
+  left: 0;
+  width: 100%;
+  transform: scale(0.98);
+}
+
+.cardWrapper:hover .hoverCard,
+.cardWrapper:focus-within .hoverCard {
+  transform: scale(1);
+}
+
+/* Prevent long titles and genres from making the card too tall. */
+.badge {
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.genres {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Small screens use the larger popup instead of hover cards. */
+@media (max-width: 767px), (hover: none) {
+  .hoverCard {
+    display: none;
+  }
 }

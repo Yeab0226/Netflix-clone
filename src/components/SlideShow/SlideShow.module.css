@@ -1,5 +1,8 @@
 .title {
   color: white;
+  padding: 0 40px;
+  margin-bottom: 12px;
+  font-size: clamp(18px, 2vw, 26px);
 }
 
 /* Make wrapper stable */
@@ -9,15 +12,16 @@
 
 /* Swiper container */
 .Row :global(.swiper) {
-  height: 400px;
-  padding: 0 50px;
+  height: auto;
+  padding: 20px 40px 280px;
 }
 
 /* Slides */
 .Row :global(.swiper-slide) {
   display: flex;
-  align-items: center;
-  height: 100%; /* remove 130% */
+  align-items: flex-start;
+  height: auto;
+  min-width: 0;
 }
 
 .Row :global(.swiper-slide:hover),
@@ -48,4 +52,26 @@
 .Row:hover :global(.swiper-button-next) {
   opacity: 1;
   pointer-events: auto;
+}
+
+@media (max-width: 767px), (hover: none) {
+  .Row :global(.swiper) {
+    padding-bottom: 24px;
+  }
+
+  .Row :global(.swiper-button-prev),
+  .Row :global(.swiper-button-next) {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    padding: 0 16px;
+  }
+
+  .Row :global(.swiper) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }

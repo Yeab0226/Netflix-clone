@@ -36,7 +36,8 @@
   cursor: pointer;
 }
 
-.player, .preview {
+.player,
+.preview {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -45,11 +46,85 @@
   background: #000;
 }
 
-.preview { position: relative; }
-.preview img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
-.preview p { position: absolute; bottom: 20px; left: 20px; right: 20px; }
-.content { padding: 24px; line-height: 1.6; }
-.content h2 { margin-bottom: 12px; }
-.meta { display: flex; flex-wrap: wrap; gap: 16px; color: #ccc; margin-bottom: 16px; }
-.genres { margin-top: 18px; color: #ccc; }
-.close:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.preview {
+  position: relative;
+}
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+.preview p {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+.content {
+  padding: 24px;
+  line-height: 1.6;
+}
+.content h2 {
+  margin-bottom: 12px;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+.genres {
+  margin-top: 18px;
+  color: #ccc;
+}
+.close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.overlay {
+  padding: 16px;
+}
+
+.modal {
+  min-width: 0;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+}
+
+.content {
+  overflow-wrap: anywhere;
+}
+
+.close {
+  width: 44px;
+  height: 44px;
+}
+
+@media (max-width: 600px) {
+  .overlay {
+    padding: 8px;
+  }
+
+  .modal {
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
+    border-radius: 6px;
+  }
+
+  .content {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .content h2 {
+    font-size: 22px;
+  }
+
+  .meta {
+    gap: 10px;
+    font-size: 13px;
+  }
+}

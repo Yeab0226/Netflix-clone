@@ -1,58 +1,129 @@
-# Netflix Clone
+# Trailer Showcase 🎬
 
-## Run locally
+A Netflix-inspired movie trailer website built with React and Vite. Browse movies and TV series, watch muted trailer previews on hover, and open a larger player to explore trailers and title details.
 
-1. Install Node.js 22.12 or newer.
-2. Open this folder in your editor and run `npm install`.
-3. In the working project folder, `.env.local` contains your existing TMDB key. The downloadable ZIP excludes that file: copy `.env.example` to `.env.local` and enter your key after extracting the ZIP.
-4. Run `npm run dev`, then open the address printed in the terminal.
-5. Restart the development server after changing the environment file.
+> Educational portfolio project. Not affiliated with, endorsed by, or operated by Netflix. This website provides trailers only—not full movies, subscriptions, or Netflix account access.
 
-## Trailers and details
+## Features
 
-- Hover over a movie for 800 milliseconds to start a muted trailer preview. Leaving the card stops it.
-- Click a poster or its Play button to open the larger trailer player with sound enabled and playback controls.
-- Click the down-arrow details button or the banner's More Info button to view the synopsis, rating, year, and genres without autoplay.
-- Close the popup using the close button, the background, or Escape. Closing removes the player and stops playback.
-- On touch devices, tap a poster to open the player.
-- Trailers and genres come from the same TMDB API used by the existing rows. Both movies and TV series are supported. Official YouTube trailers are preferred, followed by other trailers and teasers.
-- A title without a trailer keeps its image and shows an availability message. Some YouTube videos may block embedding or be unavailable in your region. Browsers may require pressing Play before sound can start.
+- **Hover previews:** Muted trailers start after an 800 ms delay and stop when the pointer leaves.
+- **Trailer player:** Click a poster or Play button to open a larger player with sound and playback controls.
+- **Movie details:** View the synopsis, rating, release year, and genres.
+- **Movie and TV rows:** Browse trending titles, featured series, action movies, and top-rated movies.
+- **Banner actions:** Play the featured trailer or open its details.
+- **Touch support:** Tap a poster to open the player.
+- **Unavailable trailers:** Display a helpful message when no trailer is available.
 
-## Code changes
+## Built With
 
-The project still uses the existing Axios instance, ordinary React state/effects, props, and CSS modules. No extra packages or backend were added.
+- React
+- Vite
+- Axios
+- CSS Modules
+- Swiper
+- React Icons and Lucide React
+- TMDB API
+- YouTube embeds
 
-- `MovieCard`: hover timer, muted iframe preview, and Play/details buttons.
-- `MovieModal`: shared trailer player and movie details popup.
-- `movieDetails`: TMDB details request and trailer selection.
-- `App`, `DisplayRow`, and `SlideShow`: pass the selected title to the shared popup.
-- `Banner`: connects Play and More Info to the same popup.
+## Getting Started
 
-## API key
+### Requirements
 
-The Axios instance reads `VITE_TMDB_API_KEY` from `.env.local`. Environment files are ignored by Git; `.env.example` is safe to commit. Do not upload `.env.local` or share a project archive containing it.
+- Node.js 22.12 or newer
+- npm
+- A TMDB API key
 
-A frontend environment variable is still visible in built browser code and network requests. It prevents accidental commits, not discovery by visitors. To keep the key secret, use a server or serverless proxy. Replace your key if it was already published in a repository.
+### Installation
 
-## Checks
+Clone this repository, open the project folder, and install the dependencies:
 
-- `npm run build`
-- `npm run lint`
+```bash
+npm install
+```
 
-## Netlify deployment
+Copy `.env.example` to `.env.local`, then add your TMDB API key:
 
-The public demo is called Trailer Showcase, uses its own text branding, and displays a portfolio disclaimer. No accounts, passwords, payments, or full-movie streaming are provided. These changes do not guarantee Netlify approval or grant permission to third-party content.
+```env
+VITE_TMDB_API_KEY=your_tmdb_api_key_here
+```
 
-### Import from a repository
+Start the development server:
 
-1. Push the project folder to your repository, excluding `.env.local`, `node_modules`, and `dist`.
-2. In Netlify, import that repository. If this folder is inside a larger repository, select it as the base directory.
-3. The included `netlify.toml` sets the build command to `npm run build`, publish directory to `dist`, and Node version to 22.
-4. Add `VITE_TMDB_API_KEY` in Netlify's environment variables for builds, then deploy.
-5. Environment values embedded in this frontend are public in the generated JavaScript. A serverless proxy is required for secrecy.
+```bash
+npm run dev
+```
 
-### Manual upload
+Open the local address shown in your terminal. Restart the server after changing the environment file.
 
-Run `npm run build` with your local `.env.local` present, then upload only the generated `dist` folder to Netlify. The built browser JavaScript contains the key; do not upload your source folder or `.env.local`.
+## Available Commands
 
-Use your own site name/domain. Keep the educational disclaimer visible. Use content you have permission to display. If Netlify flags the project, contact their support and explain it; do not try to bypass the warning.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create the production build in `dist` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run code checks |
+
+## Project Structure
+
+```text
+src/
+├── components/
+│   ├── Banner/
+│   ├── DisplayRow/
+│   ├── Footer/
+│   ├── Header/
+│   ├── MovieCard/
+│   ├── MovieModal/
+│   └── SlideShow/
+├── Utility/
+│   ├── MovieInstance.js
+│   ├── movieDetails.js
+│   └── requestUrls.js
+├── App.jsx
+└── main.jsx
+```
+
+## How Trailers Work
+
+The website uses the existing Axios instance to request title details and video information from TMDB. Both movies and TV series are supported.
+
+Official YouTube trailers are preferred. If an official trailer is unavailable, another trailer or teaser may be selected.
+
+Hovering over a card starts a short timer before loading a muted preview. Leaving the card removes the preview player. Clicking Play opens the shared trailer popup, while the details button opens it without autoplay.
+
+## API Key Handling
+
+`.env.local` is ignored by Git. Commit `.env.example` with a placeholder value, and keep your actual key out of the repository.
+
+**Frontend environment variables are not secret.** Vite includes values used by the application in its browser build, so visitors can discover the API key. A backend or serverless proxy is required to keep it private.
+
+Replace your key if it has already been published.
+
+## Deployment
+
+The project includes `netlify.toml` with:
+
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Node.js version: `22`
+- A fallback to `index.html` for client-side navigation
+
+For a repository-based deployment, configure `VITE_TMDB_API_KEY` in the hosting provider’s build environment.
+
+For manual deployment, build the project locally and upload the generated `dist` folder.
+
+## Limitations
+
+- Some titles do not have trailers.
+- Videos may be unavailable in certain regions or block embedding.
+- Browser settings may require pressing Play before audio starts.
+- Navigation categories, search, My List, notifications, and profile controls are interface placeholders.
+
+## Credits
+
+Movie information and images are provided by [TMDB](https://www.themoviedb.org/). Trailers play through [YouTube](https://www.youtube.com/).
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+Third-party names, images, and video content belong to their respective owners.

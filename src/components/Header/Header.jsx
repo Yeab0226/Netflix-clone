@@ -1,20 +1,15 @@
 import React, { useEffect } from "react";
 import Styles from "./Header.module.css";
 
-
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
-import {
-  createLucideIcon,
-  Search,
-  Bell,
-  User,
-  ChevronDown,
-} from "lucide-react";
+import { Search, Bell, User, ChevronDown } from "lucide-react";
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -41,10 +36,26 @@ function Header() {
       {/* logo and nav links  */}
       <div className={Styles.container}>
         {/* logo  */}
-        <Link className={Styles.demoLogo} to="/">Trailer Showcase</Link>
+        <Link className={Styles.demoLogo} to="/">
+          Trailer Showcase
+        </Link>
+
+        <button
+          className={Styles.menuButton}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={isMenuOpen}
+          aria-controls="main-navigation"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
 
         {/* nav links  */}
-        <nav className={Styles.nav}>
+        <nav
+          id="main-navigation"
+          className={`${Styles.nav} ${isMenuOpen ? Styles.navOpen : ""}`}
+          onClick={() => setIsMenuOpen(false)}
+        >
           <Link className={Styles.navLink} to="/">
             Home
           </Link>
@@ -114,7 +125,9 @@ function Header() {
           </div>
         </div>
       </div>
-      <p className={Styles.demoNotice}>Educational portfolio demo · Not affiliated with Netflix · Trailers only</p>
+      <p className={Styles.demoNotice}>
+        Educational portfolio demo · Not affiliated with Netflix · Trailers only
+      </p>
     </header>
   );
 }
