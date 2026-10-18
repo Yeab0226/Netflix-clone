@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useState } from "react";
 
-import { Search, Bell, User, ChevronDown } from "lucide-react";
+import { Search, Bell, User, ChevronDown, Menu, X } from "lucide-react";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
